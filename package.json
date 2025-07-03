@@ -11,16 +11,15 @@
     "bot",
     "job",
     "cv",
-    "openai",
-    "chatgpt"
+    "quote",
+    "zenquotes"
   ],
   "author": "Your Name",
   "license": "MIT",
-  "description": "A Discord bot that suggests jobs, helps write CVs, and simulates interviews using OpenAI.",
+  "description": "A Discord bot that suggests jobs and gives motivation quotes.",
   "dependencies": {
     "discord.js": "^14.21.0",
     "dotenv": "^17.0.1",
-    "node-fetch": "^3.3.2",
-    "openai": "^5.8.2"
+    "node-fetch": "^3.3.2"
   }
 }
