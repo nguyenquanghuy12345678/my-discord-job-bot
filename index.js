@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js';
-import OpenAI from 'openai';
-import config from './config.js';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
+dotenv.config();
 
 const client = new Client({
     intents: [
@@ -10,10 +11,6 @@ const client = new Client({
     ],
 });
 
-const openai = new OpenAI({
-    apiKey: config.openaiApiKey,
-});
-
 client.once('ready', () => {
     console.log(`🤖 Bot đã đăng nhập với tên ${client.user.tag}`);
 });
@@ -21,32 +18,31 @@ client.once('ready', () => {
 client.on('messageCreate', async (message) => {
     if (message.author.bot) return;
 
-    if (message.content.startsWith('!job')) {
-        const prompt = "Gợi ý cho tôi 5 nghề nghiệp phù hợp với xu thế tương lai, giải thích ngắn.";
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: prompt }],
-        });
-        message.reply(completion.choices[0].message.content);
-    }
+    try {
+        if (message.content.startsWith('!job')) {
+            const response = await fetch('https://zenquotes.io/api/random');
+            const data = await response.json();
+            const quote = `${data[0].q} — *${data[0].a}*`;
+            await message.reply(`💼 **Gợi ý nghề nghiệp / động lực:**\n> ${quote}`);
+        }
 
-    if (message.content.startsWith('!cv')) {
-        const prompt = "Hãy cho tôi 5 tips để viết CV thu hút nhà tuyển dụng.";
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: prompt }],
-        });
-        message.reply(completion.choices[0].message.content);
-    }
+        else if (message.content.startsWith('!cv')) {
+            const response = await fetch('https://zenquotes.io/api/random');
+            const data = await response.json();
+            const quote = `${data[0].q} — *${data[0].a}*`;
+            await message.reply(`📄 **Tips CV hay:**\n> ${quote}`);
+        }
 
-    if (message.content.startsWith('!interview')) {
-        const prompt = "Giả sử bạn là nhà tuyển dụng, hãy đặt cho tôi 5 câu hỏi phỏng vấn xin việc ngành CNTT.";
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: prompt }],
-        });
-        message.reply(completion.choices[0].message.content);
+        else if (message.content.startsWith('!interview')) {
+            const response = await fetch('https://zenquotes.io/api/random');
+            const data = await response.json();
+            const quote = `${data[0].q} — *${data[0].a}*`;
+            await message.reply(`🎤 **Chuẩn bị phỏng vấn:**\n> ${quote}`);
+        }
+    } catch (err) {
+        console.error("❌ Lỗi khi gọi API:", err);
+        await message.reply("⚠️ Không lấy được quote lúc này, thử lại sau nhé!");
     }
 });
 
-client.login(config.discordToken);
+client.login(process.env.DISCORD_TOKEN);

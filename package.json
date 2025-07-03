@@ -6,13 +6,21 @@
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": ["discord", "bot", "job", "cv", "openai", "chatgpt"],
+  "keywords": [
+    "discord",
+    "bot",
+    "job",
+    "cv",
+    "openai",
+    "chatgpt"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "description": "A Discord bot that suggests jobs, helps write CVs, and simulates interviews using OpenAI.",
   "dependencies": {
     "discord.js": "^14.21.0",
     "dotenv": "^17.0.1",
+    "node-fetch": "^3.3.2",
     "openai": "^5.8.2"
   }
 }
