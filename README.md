@@ -13,3 +13,4 @@ npm install
 cp .env.example .env
 # Rồi chỉnh file .env để điền token
 npm start
+YOU CAN USE RENDER TO RUN BOT 24/7
