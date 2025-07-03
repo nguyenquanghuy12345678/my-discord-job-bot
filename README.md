@@ -2,6 +2,8 @@
 
 🤖 Một bot Discord tích hợp ChatGPT để gợi ý nghề nghiệp, viết CV, mô phỏng phỏng vấn.
 
+![My Discord Job Bot Screenshot](screenshot/test_job_bot.png)
+
 ## Cách chạy
 
 ```bash
